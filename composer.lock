@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c05ceb4e71bd3f5e9e404a9841093c22",
+    "content-hash": "a3b87ecfc7bbed1140f67a3065107b49",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -2193,6 +2193,75 @@
                 "source": "https://github.com/inertiajs/inertia-laravel/tree/v2.0.14"
             },
             "time": "2025-12-10T13:29:20+00:00"
+        },
+        {
+            "name": "infinityxtech/filament-world-map-widget",
+            "version": "v2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sasaorasanin/filament-world-map-widget.git",
+                "reference": "2948461372eb3c31eed2f9d2af302a4de58aac3b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sasaorasanin/filament-world-map-widget/zipball/2948461372eb3c31eed2f9d2af302a4de58aac3b",
+                "reference": "2948461372eb3c31eed2f9d2af302a4de58aac3b",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^4.0",
+                "php": "^8.1",
+                "spatie/laravel-package-tools": "^1.15.0"
+            },
+            "require-dev": {
+                "nunomaduro/collision": "^8.8",
+                "orchestra/testbench": "^10.6",
+                "pestphp/pest": "^4.0",
+                "pestphp/pest-plugin-arch": "^4.0",
+                "pestphp/pest-plugin-laravel": "^4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "InfinityXTech\\FilamentWorldMapWidget\\FilamentWorldMapWidgetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "InfinityXTech\\FilamentWorldMapWidget\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "InfinityX Tech",
+                    "email": "developer@infinity-x.tech",
+                    "role": "Developer"
+                }
+            ],
+            "description": "World map stats widget",
+            "homepage": "https://github.com/infinityxtech/filament-world-map-widget",
+            "keywords": [
+                "InfinityXTech",
+                "filament-world-map-widget",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/infinityxtech/filament-world-map-widget/issues",
+                "source": "https://github.com/infinityxtech/filament-world-map-widget"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/InfinityXTech",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-08-31T09:32:03+00:00"
         },
         {
             "name": "kirschbaum-development/eloquent-power-joins",
