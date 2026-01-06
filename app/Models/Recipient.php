@@ -10,6 +10,7 @@ class Recipient extends Model
         'name',
         'email',
         'reception_date_time',
-        'last_ip'
+        'last_ip',
+        'country'
     ];
 }

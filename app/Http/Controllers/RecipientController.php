@@ -7,12 +7,11 @@ use App\Models\Recipient;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
+use Stevebauman\Location\Facades\Location;
 
 class RecipientController extends Controller
 {
-    //
     public function sendEbook(Request $request, string $name, string $email)
     {
         if ($recipient = Recipient::where('email', $email)->first())
@@ -20,7 +19,15 @@ class RecipientController extends Controller
             $secondsDifference = Carbon::parse($recipient->reception_date_time)->diffInSeconds(now());
         }
 
-        $publicIp = Http::get('https://api.ipify.org')->body();
+        $publicIp = $request->header('CF-Connecting-IP')
+            ?? ($request->header('X-Forwarded-For') ? trim(explode(',', $request->header('X-Forwarded-For'))[0]) : null)
+            ?? $request->ip();
+
+        $country = null;
+
+        if ($position = Location::get($publicIp)) {
+            $country = $position->countryCode;
+        }
 
         $validated = $request->validate([
             'name' => 'string|required',
@@ -41,6 +48,7 @@ class RecipientController extends Controller
                     'email' => $email,
                     'last_ip' => $publicIp,
                     'reception_date_time' => now(),
+                    'country' => $country
                 ]);
 
                 Mail::to($email)->send(new SendEbook());
