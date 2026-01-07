@@ -15,14 +15,19 @@
         })"
         x-init="init()">
         <x-filament::section>
-            <div class="flex">
+            <style>
+                .jvm-zoom-btn {
+                    display: none !important;
+                }
+            </style>
+            <div class="flex justify-between flex-wrap lg:flex-nowrap">
                 {{-- LEFT: Map --}}
                 @if(!empty($this->heading()))
                     <x-filament::section.heading>
                         {{ $this->heading() }}
                     </x-filament::section.heading>
                 @endif
-                <div wire:ignore>
+                <div wire:ignore class="grow">
                     <div id="map" style="height: {{ $this->height() }}"></div>
                 </div>
 
