@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Recipients\Tables;
 
 use App\Filament\Exports\RecipientExporter;
+use Carbon\Carbon;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\ExportAction;
 use Filament\Tables\Columns\TextColumn;
@@ -29,6 +30,11 @@ class RecipientsTable
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('email')->searchable(),
+                TextColumn::make('reception_date_time')
+                    ->label('Reception Date')
+                    ->formatStateUsing(fn ($state) => Carbon::parse($state)->diffForHumans())
+                    ->tooltip(fn ($state) => $state)
+                    ->sortable(),
                 TextColumn::make('country')
                     ->formatStateUsing(fn ($state) => Countries::getName(strtoupper(trim((string) $state)), app()->getLocale()) ?? $state)
                     ->searchable(query: function (Builder $query, string $search): Builder {
