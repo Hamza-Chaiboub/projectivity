@@ -88,8 +88,50 @@ services:
     networks:
       - laravel-development
 
+  moodle-db:
+    image: mariadb:11
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    environment:
+      MARIADB_DATABASE: moodle
+      MARIADB_USER: moodle
+      MARIADB_PASSWORD: moodlepass
+      MARIADB_ROOT_PASSWORD: rootpass
+    volumes:
+      - moodle-db-data-development:/var/lib/mysql
+    networks:
+      - laravel-development
+
+  moodle:
+    image: moodlehq/moodle-php-apache:8.3
+    depends_on:
+      - moodle-db
+    volumes:
+      - ./moodle:/var/www/html:Z
+      - moodle-data-development:/var/www/moodledata
+    networks:
+      laravel-development:
+        aliases:
+          - lms.local
+
+  moodle-cron:
+    image: moodlehq/moodle-php-apache:8.3
+    depends_on:
+      - moodle
+    volumes:
+      - ./moodle:/var/www/html
+      - moodle-data-development:/var/www/moodledata
+    command: >
+      sh -lc 'while true; do php /var/www/html/admin/cli/cron.php; sleep 60; done'
+    networks:
+      - laravel-development
+
 networks:
   laravel-development:
 
 volumes:
   postgres-data-development:
+  moodle-db-data-development:
+  moodle-data-development:
