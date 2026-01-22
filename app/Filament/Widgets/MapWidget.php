@@ -17,6 +17,7 @@ class MapWidget extends WorldMapWidget
     {
         $stats = $this->stats();
         arsort($stats);
+        $stats = array_slice($stats, 0, 10);
 
         $locale = app()->getLocale();
 
@@ -43,7 +44,7 @@ class MapWidget extends WorldMapWidget
 
     public function heading(): string|Htmlable|null
     {
-        return 'Ebook Downloaded From:';
+        return null;
     }
 
     public function color(): array
